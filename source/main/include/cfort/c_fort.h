@@ -13,8 +13,9 @@ namespace ncore
     namespace nfort
     {
         struct table_t;
+        struct border_style_t;
 
-        table_t* create_table(alloc_t* allocator);
+        table_t* create_table(alloc_t* allocator, s32 row_count, s32 col_count);
         void     destroy_table(table_t* table);
 
         struct cursor_t
@@ -23,20 +24,15 @@ namespace ncore
             s32 col;
         };
 
-        s32  is_empty(const table_t* table);
+        bool is_empty(const table_t* table);
         s32  row_count(const table_t* table);
         s32  col_count(const table_t* table);
-        s32  next_column(table_t* table, cursor_t& cursor);
-        s32  next_row(table_t* table, cursor_t& cursor);
+        bool next_column(table_t* table, cursor_t& cursor);
+        bool next_row(table_t* table, cursor_t& cursor);
 
-        template <typename... Args>
-        s32 table_column_format(table_t* table, cursor_t cursor, const char* format, Args&&... args);
-        template <typename... Args>
-        s32 table_row_format(table_t* table, cursor_t cursor, const char* format, Args&&... args);
-        template <typename... Args>
-        s32 table_grid_format(table_t* table, cursor_t cursor, s32 columns, const char* format, Args&&... args);
-
-        s32 table_separator(table_t* table, cursor_t& cursor);
+        template <typename... Args> s32 column_format(table_t* table, cursor_t cursor, const char* format, Args&&... args);
+        template <typename... Args> s32 row_format(table_t* table, cursor_t cursor, const char* format, Args&&... args);
+        template <typename... Args> s32 grid_format(table_t* table, cursor_t cursor, s32 columns, const char* format, Args&&... args);
 
         s32 set_border_style(table_t* table, const border_style_t* style);
 
@@ -73,7 +69,6 @@ namespace ncore
             ROW_COMMON = 0, // Common row
             ROW_HEADER      // Header row
         };
-
 
     } // namespace nfort
 } // namespace ncore
