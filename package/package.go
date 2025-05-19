@@ -18,13 +18,13 @@ func GetPackage() *denv.Package {
 	mainpkg.AddPackage(ccorepkg)
 
 	// 'cfort' library
-	mainlib := denv.SetupDefaultCppLibProject("cfort", "github.com\\jurgen-kluft\\cfort")
-	mainlib.Dependencies = append(mainlib.Dependencies, ccorepkg.GetMainLib())
+	mainlib := denv.SetupCppLibProject("cfort", "github.com\\jurgen-kluft\\cfort")
+	mainlib.AddDependencies(ccorepkg.GetMainLib()...)
 
 	// 'cfort' unittest project
 	maintest := denv.SetupDefaultCppTestProject("cfort_test", "github.com\\jurgen-kluft\\cfort")
-	maintest.Dependencies = append(maintest.Dependencies, cunittestpkg.GetMainLib())
-	maintest.Dependencies = append(maintest.Dependencies, ccorepkg.GetMainLib())
+	maintest.AddDependencies(cunittestpkg.GetMainLib()...)
+	maintest.AddDependencies(ccorepkg.GetMainLib()...)
 	maintest.Dependencies = append(maintest.Dependencies, mainlib)
 
 	mainpkg.AddMainLib(mainlib)
