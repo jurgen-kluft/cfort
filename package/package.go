@@ -1,9 +1,9 @@
 package cfort
 
 import (
-	denv "github.com/jurgen-kluft/ccode/denv"
 	ccore "github.com/jurgen-kluft/ccore/package"
 	cunittest "github.com/jurgen-kluft/cunittest/package"
+	denv "github.com/jurgen-kluft/go-ide/denv"
 )
 
 // GetPackage returns the package object of 'cfort'
